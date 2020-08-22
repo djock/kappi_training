@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "383692931903",
+    "firebase_url": "https://kappi-training.firebaseio.com",
+    "project_id": "kappi-training",
+    "storage_bucket": "kappi-training.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:383692931903:android:4638deeab03924ef2e498a",
+        "android_client_info": {
+          "package_name": "com.kappitraining.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "383692931903-jid8jbdurqig1ndrfbsou2t3vehbgesg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCd1izU1YwKsFvCkZrrfk804ZQzzPytWGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "383692931903-jid8jbdurqig1ndrfbsou2t3vehbgesg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
