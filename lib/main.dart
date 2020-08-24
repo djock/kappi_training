@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kappi_training/screens/loading_screen.dart';
+import 'package:kappi_training/app.dart';
 import 'package:kappi_training/utilities/app_theme.dart';
 
 void main() {
@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Kappi',
       theme: appTheme(),
-      home: LoadingScreen(),
+      home: App(),
     );
   }
 }

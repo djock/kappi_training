@@ -1,12 +1,12 @@
 class ProgramPhaseModel {
   final int daysPerWeek;
-  final List<int> activities;
+  final List<int> workouts;
 
-  ProgramPhaseModel(this.daysPerWeek, this.activities);
+  ProgramPhaseModel(this.daysPerWeek, this.workouts);
 
   ProgramPhaseModel.fromJson(Map<String, dynamic> json) :
         daysPerWeek = json['daysPerWeek'],
-        activities = _buildActivities(json['activities']);
+        workouts = _buildActivities(json['activities']);
 
   static List<ProgramPhaseModel> fromJsonList(json) {
     return json.map<ProgramPhaseModel>((obj) => ProgramPhaseModel.fromJson(obj)).toList();

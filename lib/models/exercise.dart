@@ -1,4 +1,4 @@
-class ExerciseModel {
+class Exercise {
   final int id;
   final String name;
   final String order;
@@ -8,7 +8,7 @@ class ExerciseModel {
   final String category;
   final int weight;
 
-  ExerciseModel.fromJson(Map<String, dynamic> json)
+  Exercise.fromJson(Map<String, dynamic> json)
       : id = json['exerciseId'],
         name = json['exerciseName'],
         order = json['order'],
@@ -18,9 +18,9 @@ class ExerciseModel {
         weight = json['weight'],
         category = json['category'];
 
-  static List<ExerciseModel> fromJsonList(json) {
+  static List<Exercise> fromJsonList(json) {
     return json
-        .map<ExerciseModel>((obj) => ExerciseModel.fromJson(obj))
+        .map<Exercise>((obj) => Exercise.fromJson(obj))
         .toList();
   }
 }
