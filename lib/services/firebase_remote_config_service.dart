@@ -2,21 +2,47 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'package:kappi_training/models/activity_model.dart';
 import 'package:kappi_training/models/program_model.dart';
+import 'package:kappi_training/utilities/app_state.dart';
 
 class FirebaseRemoteConfigService {
-  static List<ProgramModel> programs;
+  static RemoteConfig _remoteConfig;
 
   static Future<bool> init() async {
-    var remoteConfig = await RemoteConfig.instance;
+    _remoteConfig = await RemoteConfig.instance;
 
-    await remoteConfig.fetch(expiration: const Duration(seconds: 0));
-    await remoteConfig.activateFetched();
-    var programsList = remoteConfig.getString('programs');
-    var programsNode = json.decode(programsList);
+    await _remoteConfig.fetch(expiration: const Duration(seconds: 0));
+    await _remoteConfig.activateFetched();
 
-    programs = ProgramModel.fromJsonList(programsNode);
+    _getRemoteConfigData();
 
     return true;
   }
+
+  static void _getRemoteConfigData() {
+    _getPrograms();
+    _getActivities();
+  }
+
+  static void _getPrograms() {
+    var programsList = _remoteConfig.getString('programs');
+    var programsNode = json.decode(programsList);
+
+    AppState.programs = ProgramModel.fromJsonList(programsNode);
+  }
+
+  static void _getActivities() {
+    var programsList = _remoteConfig.getString('activities');
+    var programsNode = json.decode(programsList);
+
+    AppState.activities = ActivityModel.fromJsonList(programsNode);
+  }
+
+//  static void _getActivities() {
+//    var programsList = _remoteConfig.getString('programs');
+//    var programsNode = json.decode(programsList);
+//
+//    programs = ProgramModel.fromJsonList(programsNode);
+//  }
 }

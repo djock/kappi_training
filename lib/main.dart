@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kappi_training/screens/programs_screen.dart';
-import 'package:kappi_training/services/firebase_remote_config_service.dart';
+import 'package:flutter/services.dart';
+import 'package:kappi_training/screens/loading_screen.dart';
 import 'package:kappi_training/utilities/app_theme.dart';
 
 void main() {
@@ -10,12 +10,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    FirebaseRemoteConfigService.init();
-
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       title: 'Kappi',
       theme: appTheme(),
-      home: ProgramsScreen(),
+      home: LoadingScreen(),
     );
   }
 }
