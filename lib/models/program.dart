@@ -6,14 +6,18 @@ enum programPracticeType { constant }
 class Program {
   final int id;
   final String name;
+  final String author;
+  final String type;
   final int phasesCount;
   final List<ProgramPhaseModel> phases;
 
-  Program(this.id, this.name, this.phasesCount, this.phases);
+  Program(this.id, this.name, this.phasesCount, this.phases, this.author, this.type);
 
   Program.fromJson(Map<String, dynamic> json) :
       id = json['id'],
       name = json['name'],
+      author = json['author'],
+      type = json['type'],
       phasesCount = json['levelsCount'],
       phases = _buildPhases(json['levels']);
 

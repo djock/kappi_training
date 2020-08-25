@@ -13,7 +13,7 @@ class LoadingScreen extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Loading app data.', style: TextStyle(color: Color(0xfff4ecd6), fontWeight: FontWeight.bold, fontSize: 16),),
+                child: Text('Loading app data.', style: TextStyle(color: AppColors.textColor, fontWeight: FontWeight.bold, fontSize: 16),),
               ),
             ],
           ),

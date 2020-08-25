@@ -14,6 +14,8 @@ ThemeData appTheme() {
 
     // Define the default font family.
     fontFamily: 'Roboto',
+    highlightColor: Colors.transparent,
+    splashColor: Colors.transparent,
 
     // Define the default TextTheme. Use this to specify the default
     // text styling for headlines, titles, bodies of text, and more.

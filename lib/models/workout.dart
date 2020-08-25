@@ -4,6 +4,8 @@ class Workout {
   final int id;
   final String name;
   final String type;
+//  final String variation;
+//  final int timeToComplete;
   final List<Exercise> exercises;
 
   Workout(this.id, this.name, this.type, this.exercises);
@@ -12,6 +14,8 @@ class Workout {
       id = json['id'],
       name = json['name'],
       type = json['type'],
+//      variation = json['variation'],
+//      timeToComplete = json['timeToComplete'].toString().isNotEmpty ? json['timeToComplete'] : 0,
       exercises = _buildExercises(json['exercises']);
 
   static List<Workout> fromJsonList(json) {

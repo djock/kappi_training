@@ -9,8 +9,8 @@ class Exercise {
   final int weight;
 
   Exercise.fromJson(Map<String, dynamic> json)
-      : id = json['exerciseId'],
-        name = json['exerciseName'],
+      : id = json['id'],
+        name = json['name'],
         order = json['order'],
         sets = json['sets'],
         reps = json['reps'],

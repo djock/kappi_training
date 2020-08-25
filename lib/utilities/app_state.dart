@@ -5,5 +5,6 @@ import 'package:kappi_training/models/program.dart';
 class AppState {
   static List<Program> programs;
   static List<Workout> activities;
+  static List<Workout> individualWorkouts;
   static List<Exercise> exercises;
 }

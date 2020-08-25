@@ -17,6 +17,13 @@ class WorkoutDetailsScreen extends StatelessWidget {
         .where((element) => element.category == 'strength')
         .toList();
 
+    var benchMarkExercises = workout.exercises
+        .where((element) => element.category == 'benchmark')
+        .toList();
+    var heroWodExercises = workout.exercises
+        .where((element) => element.category == 'hero')
+        .toList();
+
     return SafeScreen(
         appBar: AppBar(
           title: Text(workout.name),
@@ -26,13 +33,16 @@ class WorkoutDetailsScreen extends StatelessWidget {
             child: Column(
           children: <Widget>[
             _buildExercisesGroup(warmupExercises, 'Warm Up'),
-            _buildExercisesGroup(strengthExercises, 'Strength')
+            _buildExercisesGroup(strengthExercises, 'Strength'),
+            _buildExercisesGroup(benchMarkExercises, 'Benchmark WOD'),
+            _buildExercisesGroup(heroWodExercises, 'Hero WOD '),
           ],
         )));
   }
 
   Widget _buildExercisesGroup(List<Exercise> exercises, String title) {
     if (exercises != null && exercises.length != 0) {
+
       return Card(
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
         elevation: 2,
