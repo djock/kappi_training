@@ -4,10 +4,10 @@ import 'package:kappi_training/app.dart';
 import 'package:kappi_training/utilities/app_theme.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Main());
 }
 
-class MyApp extends StatelessWidget {
+class Main extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
