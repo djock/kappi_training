@@ -10,39 +10,41 @@ class WorkoutDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var warmupExercises = workout.exercises
-        .where((element) => element.category == 'warmup')
-        .toList();
-    var strengthExercises = workout.exercises
-        .where((element) => element.category == 'strength')
-        .toList();
-
-    var benchMarkExercises = workout.exercises
-        .where((element) => element.category == 'benchmark')
-        .toList();
-    var heroWodExercises = workout.exercises
-        .where((element) => element.category == 'hero')
-        .toList();
-
     return SafeScreen(
         appBar: AppBar(
           title: Text(workout.name),
           centerTitle: true,
         ),
-        body: Container(
+        body: SingleChildScrollView(
             child: Column(
-          children: <Widget>[
-            _buildExercisesGroup(warmupExercises, 'Warm Up'),
-            _buildExercisesGroup(strengthExercises, 'Strength'),
-            _buildExercisesGroup(benchMarkExercises, 'Benchmark WOD'),
-            _buildExercisesGroup(heroWodExercises, 'Hero WOD '),
-          ],
+          children: _buildWorkout(),
         )));
+  }
+
+  List<Widget> _buildWorkout() {
+    Map<String, List<Exercise>> groupedExercises =
+    new Map<String, List<Exercise>>();
+
+    for (var exercise in workout.exercises) {
+      if (!groupedExercises.containsKey(exercise.category))
+        groupedExercises[exercise.category] = new List<Exercise>();
+
+      groupedExercises[exercise.category].add(exercise);
+    }
+
+    List<Widget> result = new List<Widget>();
+
+    groupedExercises.forEach((key, value) {
+      result.add(_buildExercisesGroup(value, key.toUpperCase()));
+    });
+    
+    result.add(SizedBox(height: 5,));
+
+    return result;
   }
 
   Widget _buildExercisesGroup(List<Exercise> exercises, String title) {
     if (exercises != null && exercises.length != 0) {
-
       return Card(
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
         elevation: 2,
@@ -56,43 +58,44 @@ class WorkoutDetailsScreen extends StatelessWidget {
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
             Divider(),
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: exercises.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var time = exercises[index].time != null
-                      ? ' (${exercises[index].time}s)'
-                      : '';
-                  var weight = exercises[index].weight != null
-                      ? ' (${exercises[index].weight}kg)'
-                      : '';
-                  var sets = exercises[index].sets != null
-                      ? '${exercises[index].sets}'
-                      : '';
-                  var reps = exercises[index].reps != null
-                      ? 'x${exercises[index].reps}'
-                      : '';
-
-                  return ListTile(
-                    leading: SizedBox(
-                        child: Text(exercises[index].order, style: TextStyle(color: Colors.black26),)),
-                      title: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(exercises[index].name.toUpperCase(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),),
-                          Text(' ' +
-                              sets +
-                              reps +
-                              time +
-                              weight),
-                        ],
-                      ),
-                      onTap: null);
-                }),
+            Column(
+              children: _buildExercisesList(exercises),
+            )
           ],
         ),
       );
     } else
       return SizedBox();
+  }
+
+  List<Widget> _buildExercisesList(List<Exercise> exercises) {
+    List<Widget> result = new List<Widget>();
+
+    for (var exercise in exercises) {
+      var time = exercise.time != null ? ' (${exercise.time}s)' : '';
+      var weight = exercise.weight != null ? ' (${exercise.weight}kg)' : '';
+      var sets = exercise.sets != null ? '${exercise.sets}' : '';
+      var reps = exercise.reps != null ? 'x${exercise.reps}' : '';
+
+      result.add(ListTile(
+          leading: SizedBox(
+              child: Text(
+            exercise.order,
+            style: TextStyle(color: Colors.black26),
+          )),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                exercise.name.toUpperCase(),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+              ),
+              Text(' ' + sets + reps + time + weight),
+            ],
+          ),
+          onTap: null));
+    }
+
+    return result;
   }
 }

@@ -10,18 +10,27 @@ class ProgramDetailsScreen extends StatelessWidget  {
 
   @override
   Widget build(BuildContext context) {
-    var _phases = programModel.phases;
 
     return SafeScreen(
         appBar: AppBar(
           title: Text(programModel.name),
           centerTitle: true,
         ),
-        body: Container(
-            child: ListView.builder(
-                itemCount: _phases.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ProgramPhaseWidget(phaseModel: _phases[index]);
-                })));
+        body: SingleChildScrollView(
+            child: Column(
+              children: _buildProgram(),
+            )));
+  }
+
+  List<Widget> _buildProgram() {
+    List<Widget> result = new List<Widget>();
+
+    for(var item in programModel.phases) {
+      result.add(ProgramPhaseWidget(phaseModel: item));
+    }
+
+    result.add(SizedBox(height: 5,));
+
+    return result;
   }
 }

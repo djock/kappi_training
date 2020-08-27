@@ -9,34 +9,52 @@ class ProgramPhaseWidget extends StatelessWidget {
 
   const ProgramPhaseWidget({Key key, this.phaseModel}) : super(key: key);
 
+  static BuildContext _context;
+
   @override
   Widget build(BuildContext context) {
+    _context = context;
+
     return Card(
       margin: EdgeInsets.only(left: 10, right: 10, top: 13),
       elevation: 2,
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: phaseModel.workouts.length,
-          itemBuilder: (BuildContext context, int index) {
-            var currentActivity = AppState.activities.firstWhere(
-                (element) => element.id == phaseModel.workouts[index]);
-              return ListTile(
-                  leading: SizedBox(
-                      child: IconButton(
+      child: Column(
+        children: _buildPhases(),
+      )
+    );
+  }
+
+  List<Widget> _buildPhases() {
+    List<Widget> result = new List<Widget>();
+
+    for(var item in phaseModel.workouts) {
+      var currentActivity = AppState.workouts.firstWhere(
+              (element) => element.id == item);
+
+      result.add(
+          ListTile(
+              leading: SizedBox(
+                  child: IconButton(
                     icon: Icon(Icons.fitness_center, color: AppColors.mainColor),
 
                     onPressed: null, // null disables the button
                   )),
-                  title: Text(currentActivity.name),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WorkoutDetailsScreen(
-                                  workout: currentActivity,
-                                )));
-                  });
-          }),
-    );
+              title: Text(currentActivity.name),
+              onTap: () {
+                Navigator.push(
+                    _context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkoutDetailsScreen(
+                          workout: currentActivity,
+                        )));
+              })
+      );
+    }
+
+    result.add(SizedBox(height: 5,));
+
+    return result;
   }
 }
+
+

@@ -38,7 +38,7 @@ class FirebaseRemoteConfigService {
     var remoteConfigValue = _remoteConfig.getString('workouts');
     var jsonData = json.decode(remoteConfigValue);
 
-    AppState.activities = Workout.fromJsonList(jsonData);
+    AppState.workouts = Workout.fromJsonList(jsonData);
   }
 
   static void _getIndividualWorkouts() {
