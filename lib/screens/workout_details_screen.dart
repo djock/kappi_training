@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kappi_training/models/exercise.dart';
 import 'package:kappi_training/models/workout.dart';
 import 'package:kappi_training/utilities/safe_screen.dart';
+import 'package:kappi_training/utilities/utils.dart';
+import 'package:kappi_training/widgets/exercise_widget.dart';
 
 class WorkoutDetailsScreen extends StatelessWidget {
   final Workout workout;
@@ -23,7 +25,7 @@ class WorkoutDetailsScreen extends StatelessWidget {
 
   List<Widget> _buildWorkout() {
     Map<String, List<Exercise>> groupedExercises =
-    new Map<String, List<Exercise>>();
+        new Map<String, List<Exercise>>();
 
     for (var exercise in workout.exercises) {
       if (!groupedExercises.containsKey(exercise.category))
@@ -37,14 +39,30 @@ class WorkoutDetailsScreen extends StatelessWidget {
     groupedExercises.forEach((key, value) {
       result.add(_buildExercisesGroup(value, key.toUpperCase()));
     });
-    
-    result.add(SizedBox(height: 5,));
+
+    result.add(SizedBox(
+      height: 5,
+    ));
 
     return result;
   }
 
   Widget _buildExercisesGroup(List<Exercise> exercises, String title) {
     if (exercises != null && exercises.length != 0) {
+
+      String groupTitle = '';
+      if(workout.type == 'crossfit') {
+        if(workout.variation.isNotEmpty) {
+          groupTitle += workout.variation.toUpperCase();
+        }
+
+        if(workout.timeToComplete != 0) {
+          groupTitle += ' ${Utils.formatTimeShort(workout.timeToComplete)}';
+        }
+      }
+
+      if(groupTitle.isEmpty) groupTitle = title;
+
       return Card(
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
         elevation: 2,
@@ -53,7 +71,7 @@ class WorkoutDetailsScreen extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
-              child: Text(title,
+              child: Text(groupTitle,
                   textAlign: TextAlign.start,
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             ),
@@ -72,30 +90,16 @@ class WorkoutDetailsScreen extends StatelessWidget {
     List<Widget> result = new List<Widget>();
 
     for (var exercise in exercises) {
-      var time = exercise.time != null ? ' (${exercise.time}s)' : '';
-      var weight = exercise.weight != null ? ' (${exercise.weight}kg)' : '';
-      var sets = exercise.sets != null ? '${exercise.sets}' : '';
-      var reps = exercise.reps != null ? 'x${exercise.reps}' : '';
-
-      result.add(ListTile(
-          leading: SizedBox(
-              child: Text(
-            exercise.order,
-            style: TextStyle(color: Colors.black26),
-          )),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                exercise.name.toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
-              ),
-              Text(' ' + sets + reps + time + weight),
-            ],
-          ),
-          onTap: null));
+      result.add(ExerciseWidget(exercise: exercise,));
     }
 
     return result;
   }
+
+  Widget _buildTitle() {
+    if(workout.type == 'crossfit') {
+
+    }
+  }
+
 }

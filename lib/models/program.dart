@@ -9,9 +9,10 @@ class Program {
   final String author;
   final String type;
   final int phasesCount;
+  final bool favourite;
   final List<ProgramPhaseModel> phases;
 
-  Program(this.id, this.name, this.phasesCount, this.phases, this.author, this.type);
+  Program(this.id, this.name, this.phasesCount, this.phases, this.author, this.type, this.favourite);
 
   Program.fromJson(Map<String, dynamic> json) :
       id = json['id'],
@@ -19,6 +20,7 @@ class Program {
       author = json['author'],
       type = json['type'],
       phasesCount = json['levelsCount'],
+      favourite = json['favourite'],
       phases = _buildPhases(json['levels']);
 
   static List<Program> fromJsonList(json) {

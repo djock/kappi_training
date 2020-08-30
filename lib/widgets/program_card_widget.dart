@@ -1,13 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kappi_training/models/program.dart';
 import 'package:kappi_training/screens/program_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 
 class ProgramCardWidget extends StatelessWidget {
   final Program program;
+  final bool isFavourite;
 
-  const ProgramCardWidget({Key key, this.program}) : super(key: key);
+  const ProgramCardWidget({Key key, this.program, this.isFavourite}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,54 +31,61 @@ class ProgramCardWidget extends StatelessWidget {
         ),
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ListTile(
+        child: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topRight,
+                  end: Alignment.bottomLeft,
+                  colors: [AppColors.mainColor, isFavourite ? Colors.red : Colors.blueAccent])),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              ListTile(
+                  leading: SizedBox(
+                      child: IconButton(
+                        icon: Icon(FontAwesomeIcons.info,
+                            color: AppColors.textColor),
+                        onPressed: null,
+                      )),
+                  title: Text(
+                    program.name,
+                    style: TextStyle(
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  ),
+                  subtitle: Text('Type: ' +
+                      program.type,
+                    style: TextStyle(
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 14),
+                  ),
+                  onTap: null),
+              ListTile(
                 leading: SizedBox(
                     child: IconButton(
-                      icon: Icon(Icons.fitness_center,
+                      icon: Icon(FontAwesomeIcons.at,
                           color: AppColors.textColor),
                       onPressed: null,
                     )),
                 title: Text(
-                  program.name,
-                  style: TextStyle(
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                  'From ' + program.author,
+                  style: TextStyle(color: AppColors.textColor),
                 ),
-                subtitle: Text('Type: ' +
-                    program.type,
-                  style: TextStyle(
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.normal,
-                      fontSize: 14),
-                ),
-                onTap: null),
-            ListTile(
-              leading: SizedBox(
-                  child: IconButton(
-                    icon: Icon(Icons.account_circle,
-                        color: AppColors.textColor),
-                    onPressed: null,
-                  )),
-              title: Text(
-                'Created by ' + program.author,
-                style: TextStyle(color: AppColors.textColor),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ProgramDetailsScreen(
+                                programModel: program,
+                              )));
+                },
               ),
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ProgramDetailsScreen(
-                              programModel: program,
-                            )));
-              },
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

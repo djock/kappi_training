@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kappi_training/models/program_phase.dart';
 import 'package:kappi_training/screens/workout_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
@@ -15,13 +16,9 @@ class ProgramPhaseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     _context = context;
 
-    return Card(
-      margin: EdgeInsets.only(left: 10, right: 10, top: 13),
-      elevation: 2,
-      child: Column(
+    return Column(
         children: _buildPhases(),
-      )
-    );
+      );
   }
 
   List<Widget> _buildPhases() {
@@ -35,7 +32,7 @@ class ProgramPhaseWidget extends StatelessWidget {
           ListTile(
               leading: SizedBox(
                   child: IconButton(
-                    icon: Icon(Icons.fitness_center, color: AppColors.mainColor),
+                    icon: Icon(FontAwesomeIcons.dotCircle, color: AppColors.mainColor),
 
                     onPressed: null, // null disables the button
                   )),
