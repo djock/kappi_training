@@ -1,26 +1,28 @@
-import 'package:kappi_training/models/exercise.dart';
+import 'package:kappi_training/models/exercise_model.dart';
 
-class Workout {
+class WorkoutModel {
   final int id;
   final String name;
   final String type;
   final String variation;
   final int timeToComplete;
+  final bool canSolo;
   final List<Exercise> exercises;
 
-  Workout(this.id, this.name, this.type, this.exercises, this.variation,
-      this.timeToComplete);
+  WorkoutModel(this.id, this.name, this.type, this.exercises, this.variation,
+      this.timeToComplete, this.canSolo);
 
-  Workout.fromJson(Map<String, dynamic> json)
+  WorkoutModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         name = _getName(json),
         type = json['type'],
         variation = json['variation'] != null ? json['variation'] : '',
         timeToComplete = _getTimeToComplete(json['timeToComplete']),
+        canSolo = json['canSolo'],
         exercises = _buildExercises(json['exercises']);
 
-  static List<Workout> fromJsonList(json) {
-    return json.map<Workout>((obj) => Workout.fromJson(obj)).toList();
+  static List<WorkoutModel> fromJsonList(json) {
+    return json.map<WorkoutModel>((obj) => WorkoutModel.fromJson(obj)).toList();
   }
 
   static List<Exercise> _buildExercises(List node) {

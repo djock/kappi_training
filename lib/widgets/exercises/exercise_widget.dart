@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kappi_training/models/exercise.dart';
+import 'package:kappi_training/models/exercise_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/utils.dart';
 
@@ -26,11 +26,13 @@ class ExerciseWidget extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: SizedBox(
-                    child: Text(
-                  exercise.order,
-                  style: TextStyle(color: Colors.black45),
-                )),
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey.withOpacity(0.1),
+                  child: Text(
+                    exercise.order,
+                    style: TextStyle(color: Colors.black45),
+                  ),
+                ),
               ),
               Expanded(
                 child: Column(
@@ -43,12 +45,16 @@ class ExerciseWidget extends StatelessWidget {
                           Text(
                             exercise.name.toUpperCase(),
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 14),
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13,
+                                letterSpacing: 1),
                           ),
                         ],
                       ),
                     ),
-                    _buildSpace(exercise.time != null || exercise.weight != null || exercise.equipment != null),
+                    _buildSpace(exercise.time != null ||
+                        exercise.weight != null ||
+                        exercise.equipment != null),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
@@ -57,11 +63,9 @@ class ExerciseWidget extends StatelessWidget {
                           _buildExerciseDetail(
                               equipment, FontAwesomeIcons.tools),
                           _buildSpace(exercise.equipment != null),
-
                           _buildExerciseDetail(
-                              time, FontAwesomeIcons.hourglassHalf),
+                              time, FontAwesomeIcons.stopwatch),
                           _buildSpace(exercise.time != null),
-
                           _buildExerciseDetail(
                               weight, FontAwesomeIcons.weightHanging),
                         ],
@@ -74,8 +78,7 @@ class ExerciseWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   sets + reps,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, fontSize: 15),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 ),
               ),
             ],
@@ -92,7 +95,7 @@ class ExerciseWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
-            color: Colors.grey.withOpacity(0.2)),
+            color: Colors.grey.withOpacity(0.1)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -101,13 +104,16 @@ class ExerciseWidget extends StatelessWidget {
                   top: 2.0, bottom: 2.0, left: 2.0, right: 4),
               child: Icon(
                 icon,
-                color: AppColors.mainColor,
+                color: AppColors.mainColor.withOpacity(0.5),
                 size: 16,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, right: 2.0),
-              child: Text(text),
+              child: Text(
+                text,
+                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+              ),
             ),
           ],
         ),
@@ -118,35 +124,42 @@ class ExerciseWidget extends StatelessWidget {
   }
 
   Widget _buildRest() {
-    if(exercise.rest != null && exercise.rest > 0) {
-      return Row(children: <Widget>[
-        Expanded(
-          child: new Container(
-              margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-              child: Divider(
-                color: Colors.grey.withOpacity(0.5),
-                height: 36,
-              )),
-        ),
-        Text('Rest ${Utils.formatTimeShort(exercise.rest)}', style: TextStyle(color: Colors.grey.withOpacity(0.5)),),
-        Expanded(
-          child: new Container(
-              margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-              child: Divider(
-                color: Colors.grey.withOpacity(0.5),
-                height: 36,
-              )),
-        ),
-      ]);
+    if (exercise.rest != null && exercise.rest > 0) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(children: <Widget>[
+          Expanded(
+            child: new Container(
+                margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                child: Divider(
+                  color: Colors.grey.withOpacity(0.5),
+                  height: 36,
+                )),
+          ),
+          Text(
+            'Rest ${Utils.formatTimeShort(exercise.rest)}',
+            style: TextStyle(color: Colors.grey.withOpacity(0.5)),
+          ),
+          Expanded(
+            child: new Container(
+                margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                child: Divider(
+                  color: Colors.grey.withOpacity(0.5),
+                  height: 36,
+                )),
+          ),
+        ]),
+      );
     } else {
       return SizedBox();
     }
-
   }
 
   Widget _buildSpace(bool condition) {
-    if(condition) {
-      return SizedBox(height: 10,);
+    if (condition) {
+      return SizedBox(
+        height: 10,
+      );
     } else {
       return SizedBox();
     }

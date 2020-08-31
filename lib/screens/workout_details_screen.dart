@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:kappi_training/models/exercise.dart';
-import 'package:kappi_training/models/workout.dart';
-import 'package:kappi_training/utilities/safe_screen.dart';
+import 'package:kappi_training/models/exercise_model.dart';
+import 'package:kappi_training/models/workout_model.dart';
+import 'package:kappi_training/widgets/safe_screen.dart';
 import 'package:kappi_training/utilities/utils.dart';
-import 'package:kappi_training/widgets/exercise_widget.dart';
+import 'package:kappi_training/widgets/exercises/exercise_widget.dart';
 
 class WorkoutDetailsScreen extends StatelessWidget {
-  final Workout workout;
+  final WorkoutModel workout;
 
   const WorkoutDetailsScreen({Key key, this.workout}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeScreen(
-        appBar: AppBar(
-          title: Text(workout.name),
-          centerTitle: true,
-        ),
+        appBar: Utils.buildAppBar(context, workout.name),
         body: SingleChildScrollView(
-            child: Column(
-          children: _buildWorkout(),
+            child: Container(
+          padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+          child: Column(
+            children: _buildWorkout(),
+          ),
         )));
   }
 
@@ -49,38 +49,33 @@ class WorkoutDetailsScreen extends StatelessWidget {
 
   Widget _buildExercisesGroup(List<Exercise> exercises, String title) {
     if (exercises != null && exercises.length != 0) {
-
       String groupTitle = '';
-      if(workout.type == 'crossfit') {
-        if(workout.variation.isNotEmpty) {
+      if (workout.type == 'crossfit') {
+        if (workout.variation.isNotEmpty) {
           groupTitle += workout.variation.toUpperCase();
         }
 
-        if(workout.timeToComplete != 0) {
+        if (workout.timeToComplete != 0) {
           groupTitle += ' ${Utils.formatTimeShort(workout.timeToComplete)}';
         }
       }
 
-      if(groupTitle.isEmpty) groupTitle = title;
+      if (groupTitle.isEmpty) groupTitle = title;
 
-      return Card(
-        margin: EdgeInsets.only(left: 10, right: 10, top: 13),
-        elevation: 2,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
-              child: Text(groupTitle,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-            ),
-            Divider(),
-            Column(
-              children: _buildExercisesList(exercises),
-            )
-          ],
-        ),
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+            child: Text(groupTitle,
+                textAlign: TextAlign.start,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          ),
+          Divider(),
+          Column(
+            children: _buildExercisesList(exercises),
+          )
+        ],
       );
     } else
       return SizedBox();
@@ -90,16 +85,15 @@ class WorkoutDetailsScreen extends StatelessWidget {
     List<Widget> result = new List<Widget>();
 
     for (var exercise in exercises) {
-      result.add(ExerciseWidget(exercise: exercise,));
+      result.add(ExerciseWidget(
+        exercise: exercise,
+      ));
     }
 
     return result;
   }
 
   Widget _buildTitle() {
-    if(workout.type == 'crossfit') {
-
-    }
+    if (workout.type == 'crossfit') {}
   }
-
 }

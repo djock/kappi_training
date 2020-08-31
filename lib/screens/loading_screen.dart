@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
+import 'package:kappi_training/utilities/utils.dart';
 
 class LoadingScreen extends StatelessWidget {
   @override
@@ -13,7 +14,7 @@ class LoadingScreen extends StatelessWidget {
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text('Loading app data.', style: TextStyle(color: AppColors.textColor, fontWeight: FontWeight.bold, fontSize: 16),),
+                child: Text(Utils.getLoadingScreenText(), style: TextStyle(color: AppColors.textColor, fontWeight: FontWeight.bold, fontSize: 16),),
               ),
             ],
           ),

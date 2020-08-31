@@ -1,15 +1,15 @@
-class ProgramPhaseModel {
+class ProgramLevelModel {
   final int daysPerWeek;
   final List<int> workouts;
 
-  ProgramPhaseModel(this.daysPerWeek, this.workouts);
+  ProgramLevelModel(this.daysPerWeek, this.workouts);
 
-  ProgramPhaseModel.fromJson(Map<String, dynamic> json) :
+  ProgramLevelModel.fromJson(Map<String, dynamic> json) :
         daysPerWeek = json['daysPerWeek'],
         workouts = _buildActivities(json['workouts']);
 
-  static List<ProgramPhaseModel> fromJsonList(json) {
-    return json.map<ProgramPhaseModel>((obj) => ProgramPhaseModel.fromJson(obj)).toList();
+  static List<ProgramLevelModel> fromJsonList(json) {
+    return json.map<ProgramLevelModel>((obj) => ProgramLevelModel.fromJson(obj)).toList();
   }
 
   static List<int> _buildActivities(List node) {

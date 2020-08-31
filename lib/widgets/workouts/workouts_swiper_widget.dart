@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kappi_training/models/workout.dart';
+import 'package:kappi_training/models/workout_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/app_state.dart';
-import 'package:kappi_training/widgets/workout_card_widget.dart';
+import 'package:kappi_training/widgets/workouts/workout_card_widget.dart';
 
 class WorkoutsSwiperWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Workout> _workouts = AppState.individualWorkouts;
+    List<WorkoutModel> _workouts = AppState.workouts.where((element) => element.canSolo).toList();;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

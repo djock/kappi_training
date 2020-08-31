@@ -2,12 +2,12 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'package:flutter/material.dart';
-import 'package:kappi_training/models/workout.dart';
-import 'package:kappi_training/models/program.dart';
+import 'package:kappi_training/models/user_model.dart';
+import 'package:kappi_training/models/workout_model.dart';
+import 'package:kappi_training/models/program_model.dart';
 import 'package:kappi_training/utilities/app_state.dart';
 
-class FirebaseRemoteConfigService {
+class RemoteConfigService {
   static RemoteConfig _remoteConfig;
 
   static Future<bool> init() async {
@@ -24,27 +24,27 @@ class FirebaseRemoteConfigService {
   static void _getRemoteConfigData() {
     _getPrograms();
     _getActivities();
-    _getIndividualWorkouts();
   }
 
   static void _getPrograms() {
-    var remoteConfigValue = _remoteConfig.getString('training_programs');
+    var remoteConfigValue = _remoteConfig.getString('programs');
     var jsonData = json.decode(remoteConfigValue);
 
-    AppState.programs = Program.fromJsonList(jsonData);
+    AppState.programs = ProgramModel.fromJsonList(jsonData);
   }
 
   static void _getActivities() {
     var remoteConfigValue = _remoteConfig.getString('workouts');
     var jsonData = json.decode(remoteConfigValue);
 
-    AppState.workouts = Workout.fromJsonList(jsonData);
+    AppState.workouts = WorkoutModel.fromJsonList(jsonData);
   }
 
-  static void _getIndividualWorkouts() {
-    var remoteConfigValue = _remoteConfig.getString('individual_workouts');
+  static void _getUser() {
+    var remoteConfigValue = _remoteConfig.getString('user');
     var jsonData = json.decode(remoteConfigValue);
 
-    AppState.individualWorkouts = Workout.fromJsonList(jsonData);
+    AppState.user = UserModel.fromJson(jsonData);
   }
+
 }

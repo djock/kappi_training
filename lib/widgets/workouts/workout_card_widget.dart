@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kappi_training/models/workout.dart';
+import 'package:kappi_training/models/workout_model.dart';
 import 'package:kappi_training/screens/workout_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 
 class WorkoutCardWidget extends StatelessWidget {
-  final Workout workout;
+  final WorkoutModel workout;
 
   const WorkoutCardWidget({Key key, this.workout}) : super(key: key);
 
@@ -30,7 +29,7 @@ class WorkoutCardWidget extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topRight,
                 end: Alignment.bottomLeft,
-                colors: [Colors.green, Colors.blueAccent])),
+                colors: [Colors.orangeAccent, Colors.redAccent])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
