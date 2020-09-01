@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kappi_training/models/workout_model.dart';
 import 'package:kappi_training/screens/workout_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
+import 'package:kappi_training/utilities/utils.dart';
+import 'package:kappi_training/widgets/info_text.dart';
 
 class WorkoutCardWidget extends StatelessWidget {
   final WorkoutModel workout;
@@ -21,33 +25,26 @@ class WorkoutCardWidget extends StatelessWidget {
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, right: 10, top: 13),
+        padding: EdgeInsets.all(20.0),
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        width: 150,
-        height: 100,
+        width: 200,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.orangeAccent, Colors.redAccent])),
+                begin: Alignment.bottomLeft,
+                end: Alignment.topRight,
+                colors: [AppColors.mainColor, Colors.redAccent])),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
               workout.name,
-              style: TextStyle(
-                  color: AppColors.textColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+              style: AppTheme.headerLightStyle()
             ),
-            Text(workout.type,
-              style: TextStyle(
-                  color: AppColors.textColor,
-                  fontWeight: FontWeight.normal,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 14),
-            ),
+            SizedBox(height: 10,),
+            InfoText(info: 'Type: ', value: workout.variation, icon: FontAwesomeIcons.shieldAlt,),
+            InfoText(info: 'Time: ', value: Utils.formatTimeShort(workout.timeToComplete), icon: FontAwesomeIcons.stopwatch,),
           ],
         ),
       ),

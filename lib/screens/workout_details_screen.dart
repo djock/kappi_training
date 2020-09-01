@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kappi_training/models/exercise_model.dart';
 import 'package:kappi_training/models/workout_model.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 import 'package:kappi_training/widgets/safe_screen.dart';
 import 'package:kappi_training/utilities/utils.dart';
 import 'package:kappi_training/widgets/exercises/exercise_widget.dart';
@@ -16,6 +17,11 @@ class WorkoutDetailsScreen extends StatelessWidget {
         appBar: Utils.buildAppBar(context, workout.name),
         body: SingleChildScrollView(
             child: Container(
+//              decoration: BoxDecoration(
+//                  gradient: LinearGradient(
+//                      begin: Alignment.bottomLeft,
+//                      end: Alignment.topRight,
+//                      colors: [AppColors.mainColor, Colors.redAccent])),
           padding: EdgeInsets.only(left: 10, right: 10, top: 10),
           child: Column(
             children: _buildWorkout(),
@@ -69,7 +75,7 @@ class WorkoutDetailsScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text(groupTitle,
                 textAlign: TextAlign.start,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                style: AppTheme.mediumTextDarkBoldStyle()),
           ),
           Divider(),
           Column(

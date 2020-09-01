@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import 'app_theme.dart';
 
 class Utils {
   static String formatTimeShort(int time) {
@@ -57,10 +58,7 @@ class Utils {
         ),
         title: Text(
           text,
-          style: TextStyle(
-              color: AppColors.mainColor,
-              fontWeight: FontWeight.bold,
-              fontSize: 22),
+          style: AppTheme.appBarDarkStyle(),
         ),
         centerTitle: true,
       );

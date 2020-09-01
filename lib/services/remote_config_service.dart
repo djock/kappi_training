@@ -24,6 +24,7 @@ class RemoteConfigService {
   static void _getRemoteConfigData() {
     _getPrograms();
     _getActivities();
+    _getUser();
   }
 
   static void _getPrograms() {

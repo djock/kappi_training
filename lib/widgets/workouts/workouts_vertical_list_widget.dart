@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kappi_training/screens/workout_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/app_state.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 
 class WorkoutsVerticalListWidget extends StatelessWidget {
   BuildContext _context;
@@ -17,10 +18,7 @@ class WorkoutsVerticalListWidget extends StatelessWidget {
             padding: EdgeInsets.only(top: 10, left: 20),
             child: Text(
               'Workouts',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: AppColors.mainColor),
+              style: AppTheme.headerDarkStyle(),
             )),
         Column(
           children: _buildIndividualWorkouts(),

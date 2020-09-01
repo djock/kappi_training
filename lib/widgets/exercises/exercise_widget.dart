@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kappi_training/models/exercise_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 import 'package:kappi_training/utilities/utils.dart';
 
 class ExerciseWidget extends StatelessWidget {
@@ -30,7 +31,7 @@ class ExerciseWidget extends StatelessWidget {
                   backgroundColor: Colors.grey.withOpacity(0.1),
                   child: Text(
                     exercise.order,
-                    style: TextStyle(color: Colors.black45),
+                    style: AppTheme.mediumTextDarkStyle(),
                   ),
                 ),
               ),
@@ -44,10 +45,7 @@ class ExerciseWidget extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             exercise.name.toUpperCase(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13,
-                                letterSpacing: 1),
+                            style: AppTheme.mediumTextDarkStyle(),
                           ),
                         ],
                       ),
@@ -78,7 +76,7 @@ class ExerciseWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   sets + reps,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  style: AppTheme.mediumTextDarkStyle(),
                 ),
               ),
             ],
@@ -104,15 +102,15 @@ class ExerciseWidget extends StatelessWidget {
                   top: 2.0, bottom: 2.0, left: 2.0, right: 4),
               child: Icon(
                 icon,
-                color: AppColors.mainColor.withOpacity(0.5),
-                size: 16,
+                color: AppColors.mainColor,
+                size: 12,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 2.0, bottom: 2.0, right: 2.0),
               child: Text(
                 text,
-                style: TextStyle(color: Colors.black.withOpacity(0.5)),
+                style: AppTheme.smallTextDarkStyle(),
               ),
             ),
           ],
@@ -131,22 +129,16 @@ class ExerciseWidget extends StatelessWidget {
           Expanded(
             child: new Container(
                 margin: const EdgeInsets.only(left: 10.0, right: 20.0),
-                child: Divider(
-                  color: Colors.grey.withOpacity(0.5),
-                  height: 36,
-                )),
+                child: _divider()),
           ),
           Text(
             'Rest ${Utils.formatTimeShort(exercise.rest)}',
-            style: TextStyle(color: Colors.grey.withOpacity(0.5)),
+            style: AppTheme.mediumTextGreyStyle(),
           ),
           Expanded(
             child: new Container(
                 margin: const EdgeInsets.only(left: 20.0, right: 10.0),
-                child: Divider(
-                  color: Colors.grey.withOpacity(0.5),
-                  height: 36,
-                )),
+                child: _divider()),
           ),
         ]),
       );
@@ -163,5 +155,12 @@ class ExerciseWidget extends StatelessWidget {
     } else {
       return SizedBox();
     }
+  }
+
+  Widget _divider() {
+    return Divider(
+      color: Colors.grey.withOpacity(0.5),
+      height: 36,
+    );
   }
 }

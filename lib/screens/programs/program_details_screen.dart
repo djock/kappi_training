@@ -5,7 +5,6 @@ import 'package:kappi_training/utilities/utils.dart';
 import 'package:kappi_training/widgets/programs/program_level_widget.dart';
 import 'package:kappi_training/widgets/programs/program_workout_widget.dart';
 import 'package:kappi_training/widgets/safe_screen.dart';
-import 'package:kappi_training/widgets/programs/program_workout_widget.dart';
 
 class ProgramDetailsScreen extends StatelessWidget  {
   final ProgramModel programModel;
@@ -43,7 +42,7 @@ class ProgramDetailsScreen extends StatelessWidget  {
         var currentWorkout = AppState.getWorkoutById(item);
 
         if(currentWorkout != null)
-          result.add(ProgramWorkoutWidget(workoutModel: currentWorkout));
+          result.add(ProgramWorkoutWidget(workoutModel: currentWorkout, isNested: false,));
       }
     }
 

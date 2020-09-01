@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kappi_training/models/workout_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/app_state.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 import 'package:kappi_training/widgets/workouts/workout_card_widget.dart';
 
 class WorkoutsSwiperWidget extends StatelessWidget {
@@ -16,13 +17,10 @@ class WorkoutsSwiperWidget extends StatelessWidget {
             padding: EdgeInsets.only(top: 10, left: 20),
             child: Text(
               'Workouts',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: AppColors.mainColor),
+              style: AppTheme.headerDarkStyle(),
             )),
         Container(
-          height: 120,
+          height: 200,
           child:  ListView.builder(
             padding: EdgeInsets.only(top: 0),
             scrollDirection: Axis.horizontal,

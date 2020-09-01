@@ -3,6 +3,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:kappi_training/models/program_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/app_state.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 import 'package:kappi_training/widgets/programs/program_swiper_card_widget.dart';
 
 class ProgramsSwiperWidget extends StatelessWidget {
@@ -17,10 +18,7 @@ class ProgramsSwiperWidget extends StatelessWidget {
             padding: EdgeInsets.only(top: 10, left: 20),
             child: Text(
               'Programs',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: AppColors.mainColor),
+              style: AppTheme.headerDarkStyle(),
             )),
         Container(
           height: 200,

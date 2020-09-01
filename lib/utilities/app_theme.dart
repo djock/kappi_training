@@ -26,3 +26,49 @@ ThemeData appTheme() {
     ),
   );
 }
+
+class AppTheme {
+
+  static TextStyle appBarDarkStyle() {
+    return _textStyle(22, FontWeight.bold, AppColors.mainColor);
+  }
+  static TextStyle headerLightStyle() {
+    return _textStyle(20, FontWeight.bold, AppColors.textColor);
+  }
+
+  static TextStyle headerDarkStyle() {
+    return _textStyle(20, FontWeight.bold, AppColors.mainColor);
+  }
+
+  static TextStyle mediumTextLightStyle() {
+    return _textStyle(14, FontWeight.normal, AppColors.textColor);
+  }
+
+  static TextStyle mediumTextDarkStyle() {
+    return _textStyle(14, FontWeight.normal, AppColors.mainColor);
+  }
+
+  static TextStyle mediumTextDarkBoldStyle() {
+    return _textStyle(14, FontWeight.bold, AppColors.mainColor);
+  }
+
+  static TextStyle mediumTextGreyStyle() {
+    return _textStyle(12, FontWeight.normal, Colors.grey.withOpacity(0.5));
+  }
+
+  static TextStyle smallTextLightStyle() {
+    return _textStyle(12, FontWeight.normal, AppColors.textColor);
+  }
+
+  static TextStyle smallTextDarkStyle() {
+    return _textStyle(12, FontWeight.normal, AppColors.mainColor);
+  }
+
+  static TextStyle _textStyle(double fontSize, FontWeight fontWeight, Color color){
+    return TextStyle(
+        color: color,
+        letterSpacing: 1,
+        fontWeight: fontWeight,
+        fontSize: fontSize);
+  }
+}

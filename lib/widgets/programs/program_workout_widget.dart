@@ -3,11 +3,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kappi_training/models/workout_model.dart';
 import 'package:kappi_training/screens/workout_details_screen.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
+import 'package:kappi_training/widgets/info_text.dart';
 
 class ProgramWorkoutWidget extends StatelessWidget {
   final WorkoutModel workoutModel;
+  final bool isNested; // we use this to set the color
 
-  const ProgramWorkoutWidget({Key key, this.workoutModel}) : super(key: key);
+  const ProgramWorkoutWidget({Key key, this.workoutModel, this.isNested})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -20,24 +24,25 @@ class ProgramWorkoutWidget extends StatelessWidget {
                       )));
         },
         child: Card(
+          elevation: 0,
           margin: EdgeInsets.only(left: 10, right: 10, top: 13),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
+          color: isNested ? Colors.transparent : null,
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.mainColor.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(10),
-//                gradient: LinearGradient(
-//                    begin: Alignment.topRight,
-//                    end: Alignment.bottomLeft,
-//                    colors: [
-//                      AppColors.mainColor,
-//                      AppColors.mainColor.withOpacity(0.8)
-//                    ])
-            ),
+                border: Border.all(color: Colors.orangeAccent.withOpacity(0.2), width: 2),
+                gradient: LinearGradient(
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                    colors: [
+                      isNested ? AppColors.mainColor.withOpacity(0.2) : AppColors.mainColor,
+                      isNested ?  AppColors.mainColor.withOpacity(0.2) : Colors.redAccent
+                    ])),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 12),
             child: Row(
               children: <Widget>[
@@ -48,52 +53,16 @@ class ProgramWorkoutWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(
                         workoutModel.name,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
+                        style: AppTheme.headerLightStyle(),
                       ),
                     ),
-                    _buildInfoText(
-                        'Exercises: ',
-                        workoutModel.exercises.length.toString(),
-                        FontAwesomeIcons.info),
-                    _buildInfoText(
-                        'Type: ', workoutModel.type, FontAwesomeIcons.shieldAlt)
+                    InfoText(info: 'Exercises: ', value: workoutModel.exercises.length.toString(), icon: FontAwesomeIcons.info,),
+                    InfoText(info: 'Type: ', value: workoutModel.type, icon: FontAwesomeIcons.shieldAlt,)
                   ],
                 ),
               ],
             ),
           ),
         ));
-  }
-
-  Widget _buildInfoText(String info, String value, IconData icon) {
-    if (value.isNotEmpty && value != '1') {
-      return Row(
-        children: <Widget>[
-          Icon(
-            icon,
-            color: AppColors.textColor,
-            size: 14,
-          ),
-          SizedBox(
-            width: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
-            child: Text(
-              info + ' ' + value,
-              style: TextStyle(
-                  color: AppColors.textColor,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return SizedBox();
-    }
   }
 }

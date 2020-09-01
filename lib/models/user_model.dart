@@ -8,5 +8,15 @@ class UserModel {
   UserModel.fromJson(Map<String, dynamic> json) :
         id = json['id'],
         name = json['name'],
-        favouritePrograms = json['favouritePrograms'];
+        favouritePrograms = _buildFavourites(json['favouritePrograms']);
+
+  static List<int> _buildFavourites(node)
+  {
+    List<int> result = new List<int>();
+    for(var item in node) {
+      result.add(item);
+    }
+
+    return result;
+  }
 }

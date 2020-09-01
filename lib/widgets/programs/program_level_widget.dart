@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kappi_training/models/program_level_model.dart';
 import 'package:kappi_training/utilities/app_colors.dart';
 import 'package:kappi_training/utilities/app_state.dart';
+import 'package:kappi_training/utilities/app_theme.dart';
 import 'package:kappi_training/widgets/programs/program_workout_widget.dart';
 
 class ProgramLevelWidget extends StatelessWidget {
@@ -23,10 +24,9 @@ class ProgramLevelWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
               gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [AppColors.mainColor, AppColors.mainColor.withOpacity(0.8)])
-          ),
+                  begin: Alignment.bottomLeft,
+                  end: Alignment.topRight,
+                  colors: [AppColors.mainColor, Colors.redAccent])),
           child: ExpandablePanel(
             theme: const ExpandableThemeData(
               headerAlignment: ExpandablePanelHeaderAlignment.center,
@@ -45,19 +45,14 @@ class ProgramLevelWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(1),
                       child: Text(
                         levelName + ' ' + index.toString(),
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 22),
+                        style: AppTheme.headerLightStyle()
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(1),
                       child: Text(
                         levelModel.workouts.length.toString() + ' workouts' ,
-                        style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 13),
+                        style: AppTheme.smallTextLightStyle(),
                       ),
                     ),
                   ],
@@ -95,7 +90,7 @@ class ProgramLevelWidget extends StatelessWidget {
       var workout = AppState.getWorkoutById(item);
 
       if (workout != null)
-        result.add(ProgramWorkoutWidget(workoutModel: workout));
+        result.add(ProgramWorkoutWidget(workoutModel: workout, isNested: true,));
     }
 
     return result;
